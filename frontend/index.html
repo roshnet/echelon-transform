@@ -1,0 +1,82 @@
+<!DOCTYPE html><html>
+<head>
+	<title>Echelon UI Tester</title>
+	<meta charset="utf-8"/>
+	<style type="text/css">
+		html{font-size: 20px;}
+		header{font-size: 150%;}
+		#content-space{margin-top: 5%;}
+		#form-space{margin-left: 5%;}
+		#content-space form input{margin: 1% 0%;}
+	</style>
+</head>
+<body>
+
+<header>Echelon Transformer</header>
+
+<div id="content-space">
+
+	<div id="form-space">
+		<form id="primary-form" action="" method="post">
+			<label>Insert ROW-1 elements</label><br/>
+			<input type="text" name="elem-1-1" placeholder="Element 1-1" onblur="generateField()"/> <br/>
+		</form>
+		<button onclick="generateField()"> + </button>
+		<button onclick="initRow()">Add New Row</button>
+	</div>
+
+</div>
+</body>
+</html>
+<script type="text/javascript">
+
+var mark = 1;
+// holds the value to set the name attribute value to, in the input element.
+// Hence, mark = 4 means that the new input field will have [name="elem-1-4"].
+
+
+var currentRow = 1;
+// Element insertion in matrix will start from row-1. 
+// Will get incremented on each row-change.
+
+var parent = document.getElementById('primary-form');
+
+
+function initRow(){
+	currentRow += 1;
+	mark = 1;
+	var labelTag = document.createElement('label');
+	labelTag.appendChild(document.createTextNode("Insert ROW-"+ currentRow + " elements:"));
+	// 'labelTag' ready to append to parent..
+	// preparing input field now..
+	var newInputTag = document.createElement('input');
+	newInputTag.setAttribute('type', 'number');
+	newInputTag.setAttribute('name', 'elem-' + currentRow + '-' + mark);
+	newInputTag.setAttribute('placeholder', 'Element '+currentRow+'-'+mark);
+
+	// newInputTag.setAttribute('onblur', 'generateField()');
+	// commenting this feature as it creates new fields even if unwanted..
+
+// Appending both elements to 'parent':
+	parent.appendChild(labelTag);
+	parent.appendChild(document.createElement('br'));
+	parent.appendChild(newInputTag);
+	parent.appendChild(document.createElement('br'));
+}
+
+
+function generateField(){
+	mark += 1;
+	var newInputTag = document.createElement('input');
+	newInputTag.setAttribute('type', 'number');
+	newInputTag.setAttribute('name', 'elem-' + currentRow + '-' + mark);
+	newInputTag.setAttribute('placeholder', 'Element '+currentRow+'-'+mark);
+
+	// newInputTag.setAttribute('onblur', 'generateField()');
+	// commenting this feature as it creates new fields even if unwanted..
+	parent.appendChild(newInputTag);
+	parent.appendChild(document.createElement('br'));
+}
+
+
+</script>
