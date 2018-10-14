@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+
+
+{% block output %}
+<div id="output-space">
+	{% for lbl in labels %}
+	<p><b>{{ lbl }}</b> is a label</p>
+	{% endfor %}
+	<hr color="red"/>
+	{% for val in values %}
+	<p><b>{{ val }}</b> is its corresponding value</p>
+	{% endfor %}
+</div>
+
+
+{% endblock %}

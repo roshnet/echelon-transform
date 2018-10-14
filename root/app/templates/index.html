@@ -1,0 +1,104 @@
+<!DOCTYPE html><html>
+<head>
+	<meta charset="utf-8"/>
+	<title>UI | Echelon Flask</title>
+</head>
+<body>
+
+
+<div id="fluid-container">
+
+	<div id="header">
+		<header>Echelon Transformer</header>
+	</div>
+
+	<div id="navbar">
+		<ul>
+			<a href="{{url_for('index')}}"><li>Home</li></a>
+			<a href="{{url_for('get_input')}}"><li>Start</li></a>
+		</ul>
+	</div>
+
+	<div id="content-space">
+		{% block input %}{% endblock %}
+		{% block output %}{% endblock %}
+	</div>
+	<div>
+		<footer>
+			Made with &lt;/&gt; by Roshan Sharma :)
+		</footer>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+
+var mark = 1;
+// holds the value to set the name attribute value to, in the input element(s).
+// Hence, mark = 4 means that the new input field will have [name="elem-1-4"], if
+// `currentRow` is set to 1.
+
+var currentRow = 1;
+// Element insertion in matrix will start from row-1. 
+// Will get incremented on each row-change.
+
+var parent = document.getElementById('primary-form');
+
+
+// initrow() initialises the fields to input entries for the next row.
+function initRow(){
+	currentRow += 1;
+	mark = 1;
+	var labelTag = document.createElement('label');
+	labelTag.appendChild(document.createTextNode("Insert ROW-"+ currentRow + " elements:"));
+	// 'labelTag' ready to append to parent..
+	// preparing input field now..
+	var newInputTag = document.createElement('input');
+	newInputTag.setAttribute('type', 'number');
+	newInputTag.setAttribute('name', 'elem-' + currentRow +'-'+ mark);
+	newInputTag.setAttribute('placeholder', 'Element '+ currentRow +'-'+ mark);
+
+	// newInputTag.setAttribute('onblur', 'generateField()');
+	// commenting this feature as it creates new fields even if unwanted..
+
+// Appending both elements to 'parent':
+	parent.appendChild(labelTag);
+	parent.appendChild(document.createElement('br'));
+	parent.appendChild(newInputTag);
+	parent.appendChild(document.createElement('br'));
+}
+
+
+// generateField() simply creates a new input field with required 'name' attribute's value.
+// The value of name attribute is decided from values of `currentRow` and `mark`.
+function generateField(){
+	mark += 1;
+	var newInputTag = document.createElement('input');
+	newInputTag.setAttribute('type', 'number');
+	newInputTag.setAttribute('name', 'elem-' + currentRow + '-' + mark);
+	newInputTag.setAttribute('placeholder', 'Element '+ currentRow +'-'+ mark);
+
+	// newInputTag.setAttribute('onblur', 'generateField()');
+	// commenting this feature as it creates new fields even if unwanted..
+	parent.appendChild(newInputTag);
+	parent.appendChild(document.createElement('br'));
+}
+
+/*
+DOCTSRINGS [v2]:
+
+This version stops the entering of new row data when limit is exceeded.
+
+Suppose user first enters 'n' entries in row-1,
+then he cannot enter more than 'n' entries in the next row.
+
+
+
+
+// use 
+var childCount = document.querySecectorAll('#window > section').length;
+
+
+
+*/
+</script>
