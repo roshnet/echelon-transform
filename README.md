@@ -3,4 +3,4 @@ Minimalistic web interface to convert a user-derived matrix to its Echelon repre
 
   Backend uses: Python3, Flask. 
 
-  Frontend uses: VanillaJS, HTML/CSS
+  Frontend uses: VanillaJS, HTML5/CSS3
