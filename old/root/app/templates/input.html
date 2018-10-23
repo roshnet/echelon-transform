@@ -1,0 +1,16 @@
+
+{% extends "index.html" %}
+
+{% block input %}
+
+<div id="input-space">
+	<form id="primary-form" action="{{url_for('handle_input')}}" method="post">
+		<label>Insert ROW-1 elements</label><br/>
+		<input type="text" name="elem-1-1" placeholder="Element 1-1" onblur="generateField()"/><br/>
+	</form>
+	<input form="primary-form" type="submit" value="Go!!">
+	<button onclick="generateField()"> + </button>
+	<button onclick="initRow()">Add New Row</button>
+</div>
+
+{% endblock %}

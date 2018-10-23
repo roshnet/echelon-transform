@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+
+{% block output %}
+
+<div id="output-space">
+	<h1>Input was:</h1><br/>
+
+	{% for i in range(len(matrix)) %}
+		<tr>
+			{% for j in range(len(matrix[0])) %}
+				<td> {% matrix[i][j] %} </td>
+			{% endfor %}
+			<br/>
+		</tr>
+	{% endfor %}
+	
+	<h1>Output is: </h1><br/>
+	{% for i in range(len(matrix_conv)) %}
+		<tr>
+			{% for j in range(len(matrix_conv[0])) %}
+				<td> {% matrix_conv[i][j] %} </td>
+			{% endfor %}
+			<br/>
+		</tr>
+	{% endfor %}
+</div>
+
+
+{% endblock %}
