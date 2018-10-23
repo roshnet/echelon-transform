@@ -45,7 +45,7 @@ var currentRow = 1;
 var parent = document.getElementById('primary-form');
 
 
-// initrow() initialises the fields to input entries for the next row.
+// initRow() initialises the fields to input entries for the next row.
 function initRow(){
 	currentRow += 1;
 	mark = 1;
@@ -57,6 +57,7 @@ function initRow(){
 	newInputTag.setAttribute('type', 'number');
 	newInputTag.setAttribute('name', 'elem-' + currentRow +'-'+ mark);
 	newInputTag.setAttribute('placeholder', 'Element '+ currentRow +'-'+ mark);
+	newInputTag.setAttribute('form', 'primary-form');
 
 	// newInputTag.setAttribute('onblur', 'generateField()');
 	// commenting this feature as it creates new fields even if unwanted..
@@ -77,7 +78,7 @@ function generateField(){
 	newInputTag.setAttribute('type', 'number');
 	newInputTag.setAttribute('name', 'elem-' + currentRow + '-' + mark);
 	newInputTag.setAttribute('placeholder', 'Element '+ currentRow +'-'+ mark);
-
+	newInputTag.setAttribute('form', 'primary-form');
 	// newInputTag.setAttribute('onblur', 'generateField()');
 	// commenting this feature as it creates new fields even if unwanted..
 	parent.appendChild(newInputTag);
@@ -85,9 +86,9 @@ function generateField(){
 }
 
 /*
-DOCTSRINGS [v2]:
+DOCTSRINGS [v2] (not yet made):
 
-This version stops the entering of new row data when limit is exceeded.
+This version should stops the entering of new row data when limit is exceeded.
 
 Suppose user first enters 'n' entries in row-1,
 then he cannot enter more than 'n' entries in the next row.

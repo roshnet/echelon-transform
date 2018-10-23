@@ -6,20 +6,20 @@
 <div id="output-space">
 	<h1>Input was:</h1><br/>
 
-	{% for i in range(len(matrix)) %}
+	{% for i in range(len(original)) %}
 		<tr>
-			{% for j in range(len(matrix[0])) %}
-				<td> {% matrix[i][j] %} </td>
+			{% for j in range(len(original[0])) %}
+				<td> {% original[i][j] %} </td>
 			{% endfor %}
 			<br/>
 		</tr>
 	{% endfor %}
 	
 	<h1>Output is: </h1><br/>
-	{% for i in range(len(matrix_conv)) %}
+	{% for i in range(len(converted)) %}
 		<tr>
-			{% for j in range(len(matrix_conv[0])) %}
-				<td> {% matrix_conv[i][j] %} </td>
+			{% for j in range(len(converted[0])) %}
+				<td> {% converted[i][j] %} </td>
 			{% endfor %}
 			<br/>
 		</tr>
