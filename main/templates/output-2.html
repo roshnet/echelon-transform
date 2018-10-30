@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+
+{% block output %}
+
+<div id="output-space">
+	<h1>Input was:</h1><br/>
+
+	{% for row in matrix_orig %}
+		<tr>
+			{% for elem in row %}
+				<td> {{ elem }} </td>
+			{% endfor %}
+			<br/>
+		</tr>
+	{% endfor %}
+	<br/><br/>
+	<h1>Output is: </h1><br/>
+	{% for row in matrix_conv %}
+	<tr>
+		{% for elem in row %}
+			<td> {{ elem }} </td>
+		{% endfor %}
+		<br/>
+	</tr>
+{% endfor %}
+</div>
+
+
+{% endblock %}

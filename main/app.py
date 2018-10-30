@@ -18,7 +18,7 @@ def get_input():
 	return render_template('input.html')
 
 
-@app.route('/handle_input', methods=['GET', 'POST'])
+@app.route('/handle_input', methods=['POST'])
 def handle_input():
 	if request.method == 'POST':
 		keys, values = [], []
@@ -28,28 +28,28 @@ def handle_input():
 		for val in data.values():
 			values.append(int(val))
 
-		m = int(keys[len(keys)-1][5]) ## when name="elem-m-n"
-		# m = keys[len(keys)-1][0] ## when name="m-n"
-
+		# Targeting the 6th and 8th char in the last element in the list 'keys',
+		# as the last element's name tells number of rows and columns.
+		m = int(keys[len(keys)-1][5]) 
 		n = int(keys[len(keys)-1][7])
+
+		# Now traversing over the entries in the list 'values', and generating
+		# a regular 2D matrix from it based on the keynames.
+
 		matrix = []
 		idx = 0
+
 		while idx < (m*n):
+			row = []
 			for x in range(n):
 				# runs <# of columns> times, always.
-				row = []
 				row.append(values[idx+x])
 			matrix.append(row)
 			idx = idx + n
 		matrix_tmp = deepcopy(matrix)
 		matrix_conv = convert(matrix_tmp)
-		del matrix_tmp
-		# matrix prepared after above 'while' finishes..
-		# print('\n\n', data, '\n\n', m, '\n\n', n, '\n\n')
-		print('\n\n', matrix, '\n\n')
-		print('\n', matrix_conv, '\n\n')
-		print('\n\n\n')
-		return render_template('output.html', original=matrix, converted=matrix_conv)
+
+		return render_template('output.html', matrix_orig=matrix, matrix_conv=matrix_conv)
 
 	else:
 		return 'You are not using HTTP POST method.'

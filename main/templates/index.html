@@ -23,83 +23,57 @@
 		{% block input %}{% endblock %}
 		{% block output %}{% endblock %}
 	</div>
+
+
 	<div>
 		<footer>
 			Made with &lt;/&gt; by Roshan Sharma :)
 		</footer>
 	</div>
+
+
 </div>
 </body>
 </html>
-<script type="text/javascript">
-
-var mark = 1;
-// holds the value to set the name attribute value to, in the input element(s).
-// Hence, mark = 4 means that the new input field will have [name="elem-1-4"], if
-// `currentRow` is set to 1.
-
-var currentRow = 1;
-// Element insertion in matrix will start from row-1. 
-// Will get incremented on each row-change.
+<script type="text/javascript">	
 
 var parent = document.getElementById('primary-form');
 
+var numRows = document.querySelector('[name="row-count"]').value;
+var numCols = document.querySelector('[name="column-count"]').value;
 
-// initRow() initialises the fields to input entries for the next row.
-function initRow(){
-	currentRow += 1;
-	mark = 1;
-	var labelTag = document.createElement('label');
-	labelTag.appendChild(document.createTextNode("Insert ROW-"+ currentRow + " elements:"));
-	// 'labelTag' ready to append to parent..
-	// preparing input field now..
-	var newInputTag = document.createElement('input');
-	newInputTag.setAttribute('type', 'number');
-	newInputTag.setAttribute('name', 'elem-' + currentRow +'-'+ mark);
-	newInputTag.setAttribute('placeholder', 'Element '+ currentRow +'-'+ mark);
-	newInputTag.setAttribute('form', 'primary-form');
+var i = ii = 0;
 
-	// newInputTag.setAttribute('onblur', 'generateField()');
-	// commenting this feature as it creates new fields even if unwanted..
+var currentRow = currentCol = 1;
 
-// Appending both elements to 'parent':
-	parent.appendChild(labelTag);
-	parent.appendChild(document.createElement('br'));
-	parent.appendChild(newInputTag);
-	parent.appendChild(document.createElement('br'));
+function generateFields(){
+
+	for (i = 0; i < numRows; i++){
+		var labelTag = document.createElement('label');
+		labelTag.appendChild(document.createTextNode("Insert ROW-"+ currentRow + " elements:"));
+		parent.appendChild(labelTag);
+		parent.appendChild(document.createElement('br'));
+		currentCol = 1;
+		for (ii = 0; ii < numCols; ii++){
+			var inputTag = document.createElement('input');
+			inputTag.setAttribute('type', 'text');
+			inputTag.setAttribute('name', 'elem-'+ currentRow +'-'+ currentCol);
+			inputTag.setAttribute('placeholder', 'Element '+ currentRow +'-'+ currentCol);
+			inputTag.setAttribute('form', 'primary-form'); // check if required or not.
+			inputTag.setAttribute('size', '5');
+			parent.appendChild(inputTag);
+			currentCol += 1;
+		}
+		parent.appendChild(document.createElement('br'));
+		currentRow += 1;
+	}
+	// add submit button ..
+	var submitButton = document.createElement('button');
+	submitButton.setAttribute('form', 'primary-form');
+	submitButton.appendChild(document.createTextNode('Process data'));
+	parent.appendChild(submitButton);
+	// removing action button..
+	document.querySelector('[onclick="generateFields()"]').style.display = 'none';
 }
 
-
-// generateField() simply creates a new input field with required 'name' attribute's value.
-// The value of name attribute is decided from values of `currentRow` and `mark`.
-function generateField(){
-	mark += 1;
-	var newInputTag = document.createElement('input');
-	newInputTag.setAttribute('type', 'number');
-	newInputTag.setAttribute('name', 'elem-' + currentRow + '-' + mark);
-	newInputTag.setAttribute('placeholder', 'Element '+ currentRow +'-'+ mark);
-	newInputTag.setAttribute('form', 'primary-form');
-	// newInputTag.setAttribute('onblur', 'generateField()');
-	// commenting this feature as it creates new fields even if unwanted..
-	parent.appendChild(newInputTag);
-	parent.appendChild(document.createElement('br'));
-}
-
-/*
-DOCTSRINGS [v2] (not yet made):
-
-This version should stops the entering of new row data when limit is exceeded.
-
-Suppose user first enters 'n' entries in row-1,
-then he cannot enter more than 'n' entries in the next row.
-
-
-
-
-// use 
-var childCount = document.querySecectorAll('#window > section').length;
-
-
-
-*/
 </script>
